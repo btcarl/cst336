@@ -55,6 +55,9 @@ span {
 	border-right:solid thin #8383A7;
 	text-align:center 
 }
+.menuItem:Hover {
+	background-color:#B1B0BC
+}
 .currentPage {
 	background-color:#CDCDCD
 }
@@ -80,3 +83,4 @@ span {
 	text-decoration:none;
 	color:black
 }
+
