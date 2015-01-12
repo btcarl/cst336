@@ -1,0 +1,14 @@
+table {
+	border:solid;
+    background-color: #000066;
+	//border-collapse:collapse;
+	margin:0 auto;
+	border-spacing:20px
+}
+td, th {
+	padding:10px;
+    background-color:white; 
+    height: 30px;
+    border-radius: 30px;
+    border:solid blue
+}

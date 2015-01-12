@@ -1,0 +1,25 @@
+body {
+	background-color: #C7C79C;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h2 {
+	text-align:center;
+	margin: 0
+}
+table {
+	border:solid;
+	border-collapse:collapse;
+	margin:0 auto
+}
+td, th {
+	padding:10px
+}
+
+.even {
+	background-color:#F76F71
+}
+.odd {
+	background-color:#A9A8B8
+}
+
+
