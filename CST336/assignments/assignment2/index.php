@@ -20,8 +20,8 @@
 	</head>
 
 	<body>
-		<div>
-        <h1> Connect Four</h1>
+		<div class="gamewrapper">
+            <h1> Connect Four</h1>
 		<?php
 			$randomnum;
             function makeColumn(){
@@ -257,5 +257,29 @@
 			
 		?>
 		</div>
+        <div id="navWrapper">
+      <h2 id="linkheader">CST 336 Links</h2>
+      <ul>
+        <li>
+          <span class="sections">Labs</span>
+          <ul>
+            <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab1/lab1.html">Lab 1</a></li>
+            <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab2/index.php">Lab 2</a></li>
+            <li>Lab 3</li>
+            <li>Lab 4</li>
+            <li>Lab 5</li>
+          </ul>
+        </li>
+        <li >
+          <span class="sections">Assignments</span>
+          <ul>
+              <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
+              <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
+          </ul>
+        </li>
+        <li class="sections">Team Assignment</li>
+        <li class="sections"><a href="http://btc-csit.blogspot.com/">Learning Journal</a></li>
+      </ul>
+    </div>
 	</body>
 </html>
