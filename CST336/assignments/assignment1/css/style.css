@@ -1,21 +1,29 @@
 @charset "utf-8";
 /* CSS Document */
 body {
-	background-color:#D8CCCC;
+	background-color:#E8EAF6;
 	text-align:start;
-	font-family:Helvetica, Arial, sans-serif
+	font-family:Helvetica, Arial, sans-serif;
+    color: #1A237E;
+    margin:0
 }
+/* Header */
 h1 {
 	text-align:center;
     padding-top:30px;
     padding-bottom: 30px;
+    color: #DBE3F3;
 	margin: 0 auto
 }
+#header {
+    background-color: #3F51B5;
+}
 
+/*body*/
 #bodyWrapper {
 	text-align:center;
-	width:96%;
-	border-top:4px solid black;
+	width:100%;
+	border-top:3px solid black;
 	overflow:hidden;
     padding: 30px;
 	padding-left:10px;
@@ -23,26 +31,51 @@ h1 {
 	padding-top:20px;
     margin: none
 }
+
+/*Navigation*/
 #navWrapper{
-	width:180px;
+	width:200px;
 	float:right;
 	text-align:left;
 	padding-left:10px;
     padding-right: 30px;
     border-left: thin solid black
 }
+.sections {
+	font-weight:800
+}
+.links {
+    font-weight: 600;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: #7986CB
+}
+ul {
+    padding: 20px
+}
+#linkheader {
+    font-size = 24px
+}
+
+
 #imageWrapper{
-    padding-bottom:20px;  
+    padding-bottom:20px;
+    box-shadow:2px;
 	width:300px;
 	float:left	
 }
 #pWrapper {
 	float:left;
-    width: 30%;
+    width: 40%;
 	text-indent:20px;
     overflow:hidden;
 	padding-left:10px
 }
-.sections {
-	font-weight:800
+
+#footer {
+    background-color: #3F51B5;
 }
+

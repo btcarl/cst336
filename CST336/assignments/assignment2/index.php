@@ -263,18 +263,18 @@
         <li>
           <span class="sections">Labs</span>
           <ul>
-            <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab1/lab1.html">Lab 1</a></li>
-            <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab2/index.php">Lab 2</a></li>
-            <li>Lab 3</li>
-            <li>Lab 4</li>
-            <li>Lab 5</li>
+            <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab1/lab1.html">Lab 1</a></li>
+            <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab2/index.php">Lab 2</a></li>
+            <li class="links">Lab 3</li>
+            <li class="links">Lab 4</li>
+            <li class="links">Lab 5</li>
           </ul>
         </li>
         <li >
           <span class="sections">Assignments</span>
           <ul>
-              <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
-              <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
+              <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
+              <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
           </ul>
         </li>
         <li class="sections">Team Assignment</li>

@@ -1,6 +1,9 @@
 body {
-	background-color: #C7C79C;
-	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color:#E8EAF6;
+	text-align:start;
+	font-family:Helvetica, Arial, sans-serif;
+    color: #1A237E;
+    margin:20px;
 }
 h2 {
 	text-align:center;
@@ -9,7 +12,8 @@ h2 {
 table {
 	border:solid;
 	border-collapse:collapse;
-	margin:0 auto
+	margin:0 auto;
+    padding: 20px
 }
 td, th {
 	padding:10px
