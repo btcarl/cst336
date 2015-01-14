@@ -135,7 +135,7 @@
 						if($x+2<=6 and $y+2<=5){
 							if($game[$x+2][$y+2]==$color){
 								$count++;
-								if($x+3<=6 and $y+3<=6){
+								if($x+3<=6 and $y+3<=5){
 									if($game[$x+3][$y+3]==$color){
 										$count++;
 									}
