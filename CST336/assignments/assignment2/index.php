@@ -273,8 +273,8 @@
         <li >
           <span class="sections">Assignments</span>
           <ul>
-              <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
-              <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
+              <li class="links"><a  href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
+              <li class="links"><a  style="color:#e91e63" href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
           </ul>
         </li>
         <li class="sections">Team Assignment</li>
