@@ -38,7 +38,7 @@ h1 {
 
 /*Navigation*/
 #navWrapper{
-	width:190px;
+	width:199px;
 	float:right;
 	text-align:left;
 	padding-left:10px;
@@ -56,6 +56,9 @@ a {
 }
 a:hover {
     color: #7986CB
+}
+a:visited {
+    color: #1A237E
 }
 .currentpage {
     color: #e91e63;

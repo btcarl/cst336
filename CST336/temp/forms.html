@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Lab 2</title>
+		<meta name="description" content="">
+		<meta name="author" content="bcarlston">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link type="text/css" rel="stylesheet" href="style.css">
+	</head>
+    <body>
+
+        Here is the form below.
+        <form name="myform" method="post" action="formprocess.html">
+
+            Enter your name here:<input type="text" maxlength="10" size="50" name="myText" value="enter data here"><br>
+            Enter lots of text here: <textarea name="myTa" rows="10" cols="25" disabled>
+            </textarea><br>
+            Choose an option: <select name="mySel" size="3" multiple>
+                <option value="1">my list item 1</option>
+                <option value="2">my list item 2</option>
+                <option value="3">my list item 3</option>
+                <option value="4">my list item 4</option>
+                <option value="5">my list item 5</option>
+                <option value="6">my list item 6</option>
+            </select>
+            <br>
+            Yes: <input type="checkbox" name="rad1" value="yes" checked="checked">
+            No: <input type="checkbox" name="rad1" value="no">
+            Maybe: <input type="checkbox" name="rad1" value="maybe">
+            <br>
+            <input type="button" name="myBtn" value="Click here">
+            <input type="submit" name="mySub" value="Enter">
+            <input type="reset" name="myRes" value="clear">
+        </form>
+    </body>
+</html>
