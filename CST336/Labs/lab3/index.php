@@ -23,14 +23,20 @@
             $right="";
             $leftUnitType="";
             $rightUnitType="";
+            $errorMessage= "";
             if(isset($_GET['left'])){
-                $left = $_GET['left'];
+                if (is_numeric($_GET['left'])){
+                    $left = $_GET['left'];
+                }
+                else{
+                    $left = 0.0;
+                    $errorMessage = "You must enter a number";
+                }
             }
             if(isset($_GET['leftSelect'])){
                 $leftUnitType = $_GET['leftSelect'];
             }
 
-            echo $leftUnitType;
             if(isset($_GET['rightSelect'])){
                 $rightUnitType = $_GET['rightSelect'];
             }
@@ -44,7 +50,7 @@
                                                     break;
                                     case 'yards':   $right = $left*0.02777778;
                                                     break;
-                                    case 'feet':    $right = $left*12;
+                                    case 'feet':    $right = $left*(1/12);
                                                     break;
                                 }
                                 break;
@@ -83,20 +89,20 @@
                                                     break;
                                     case 'yards':   $right = $left;
                                                     break;
-                                    case 'feet':    $right = $left*12;
+                                    case 'feet':    $right = $left*3;
                                                     break;
                                 }
                                 break;
                 case 'feet':      switch($rightUnitType){
-                                    case 'inches':  $right = $left*3;
+                                    case 'inches':  $right = $left*12;
                                                     break;
-                                    case 'cm':      $right= $left*.25;
+                                    case 'cm':      $right= $left*30.48;
                                                     break;
-                                    case 'meters':  $right = $left*6;
+                                    case 'meters':  $right = $left*0.3048;
                                                     break;
-                                    case 'yards':   $right = $left*9;
+                                    case 'yards':   $right = $left*0.33333333;
                                                     break;
-                                    case 'feet':    $right = $left*12;
+                                    case 'feet':    $right = $left;
                                                     break;
                                 }
                                 break;
@@ -112,10 +118,11 @@
         <h1 >Converter</h1>
         <div id="mainWrapper">
             <form name="convert form" method="get">
+                <p class="error"><?php echo $errorMessage ?></p>
                 <table>
                     <tr>
                         <td><input type="text" name="left" maxlength="20" value="<?php echo $left; ?>" > </td>
-                        <td rowspan="2" > = </td>
+                        <td id="equals" rowspan="2" > = </td>
                         <td><input type="text" name="right" maxlength="20" disabled value="<?php echo $right; ?>"> </td>
                     </tr>
                     <tr>
@@ -139,7 +146,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><input type="submit" name="mySub" value="Enter"></td>
+                        <td  id="subbut" colspan="3"><input type="submit" name="mySub" value="Enter"></td>
                     </tr>
                 </table>
             </form>
@@ -165,7 +172,7 @@
                   <ul>
                     <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab1/lab1.html">Lab 1</a></li>
                     <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab2/index.php">Lab 2</a></li>
-                    <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab3/index.php">Lab 3</a></li>
+                    <li class="links"><a  style="color:#e91e63" href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab3/index.php">Lab 3</a></li>
                     <li class="links">Lab 4</li>
                     <li class="links">Lab 5</li>
                   </ul>
@@ -174,7 +181,7 @@
                   <span class="sections">Assignments</span>
                   <ul>
                       <li class="links"><a  href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment1/homepage.html">Assignment 1</a></li>
-                      <li class="links"><a  style="color:#e91e63" href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
+                      <li class="links"><a  href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment2/index.php">Assignment 2</a></li>
                   </ul>
                 </li>
                 <li class="sections">Team Assignment</li>

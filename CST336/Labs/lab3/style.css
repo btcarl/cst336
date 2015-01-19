@@ -16,6 +16,7 @@ body {
     color: #1A237E;
     font-family:Helvetica, Arial, sans-serif;
 	overflow:scroll;
+    min-width:800px;
     line-height: normal;
 }
 
@@ -26,8 +27,8 @@ body {
 	text-align:left;
 	padding-left:10px;
     padding-right: 30px;
-    margin-top: 113px;
-    border-left: thin solid black
+    border-left: thin solid black;
+    margin-top: 10px
 }
 .sections {
 	font-weight:800
@@ -55,3 +56,52 @@ ul {
     font-size:24px
 }
 
+/*  main section */
+#mainWrapper {
+    float:left;
+    display: inline;
+    overflow: hidden;
+    width: 60%;
+    margin-left: 9%;
+    margin-right: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    font-size: 18px;
+}
+tr, td {
+    padding: 0px;
+    max-width: 175px;
+}
+#equals {
+    padding: 15px;
+    padding-top: 14px;
+    background: white;
+    border: thin solid gray;
+}
+
+select {
+    padding: 0px;
+    height: 30px;
+    width: 176px;
+    font-size: 18px;
+}
+
+input {
+    height: 30px;
+    padding: 0px;
+    width: 174px;
+    font-size: 18px;
+    border: thin grey solid;
+
+}
+
+.error {
+    color:#e91e63
+}
+
+#subbut {
+    text-align: center;
+    width: 600px;
+}
