@@ -25,6 +25,15 @@ body {
     margin:0;
     padding: 0;
 }
+ul {
+    padding: 10px;
+
+}
+li.quest {
+    list-style-type: none;
+    padding-top: 10px
+}
+
 
 /*navigation*/
 #navWrapper{
@@ -33,7 +42,7 @@ body {
 	text-align:left;
 	padding-left:10px;
     padding-right: 30px;
-    margin-top: 113px;
+    margin-top: 10px;
     border-left: thin solid black
 }
 .sections {
@@ -60,4 +69,10 @@ ul {
 #linkheader {
     text-align: left;
     font-size:24px
+}
+
+#main {
+    float: left;
+    margin-left: 40px;
+    max-width: 70%;
 }

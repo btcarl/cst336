@@ -29,16 +29,60 @@
             </h2>
             <h3>
                 Find the one you jibe with today. Our algorithms will pair you up with your ideal<sup>*</sup> match.
+
             </h3>
+            <h4>To get started tell us about yourself.</h4>
+            <form name="profile" method="post" action="results.php">
+                <ul>
+                    <li class="quest">First Name: <input type="text" name="fname"> </li>
+                    <li class="quest">Last Name:  <input type="text" name="lname"></li>
+                    <li class="quest">Gender:
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female">Female
+                    </li >
+                    <li class="quest">Select Hair Color:
+                        <select name="haircolor" size="1">
+                            <option value="red">Red</option>
+                            <option value="bown">Brown</option>
+                            <option value="black">Black</option>
+                            <option value="blonde">Blonde</option>
+                            <option value="gray">Gray</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </li>
+                    <li  class="quest">Select Eye Color:
+                        <select name="eyecolor" size="1">
+                            <option value="green">Green</option>
+                            <option value="black">Black</option>
+                            <option value="blue">Blue</option>
+                            <option value="gray">Gray</option>
+                        </select>
+                    </li>
+
+
+
+                </ul>
+                <h4>Answer the following multiple choice questions to determine your JIBE<sup>&copy;</sup>.</h4>
+                <ul>
+                    <li class="quest">Which day do you prefer?
+                        <li class="quest"><input type="radio" name="days" value="monday">Monday </li>
+                        <li class="quest"><input type="radio" name="days" value="thursday">Thursday</li>
+                        <li class="quest"><input type="radio" name="days" value="sunday">Sunday</li>
+                    </li>
+                    <li class="quest"></li>
+                    <li class="quest">In a companion which do you prefer?
+                        <li class="quest"><input type="radio" name="prefer" value="opposite">Complete opposite </li>
+                        <li class="quest"><input type="radio" name="prefer" value="same">Exactly the same</li>
+                        <li class="quest"><input type="radio" name="prefer" value="middle">Somewhere in between</li>
+                    </li>
+
+                </ul>
+                <input type="submit" name="mySub" value="Find you Jibe">
+            </form>
+                   <div id="footer">
+            <p><sup>*</sup>Ideal matches might possibly be made at complete random. Jibe is not responsible for the veracity of matches and is one hundred percent unaccountable for matches that result in confusion. </p>
+</div>
         </div>
-
-
-
-
-
-
-
-
 
         <div id="navWrapper">
             <h2 id="linkheader">CST 336 Links</h2>
@@ -65,8 +109,6 @@
                 <li class="sections"><a href="http://btc-csit.blogspot.com/">Learning Journal</a></li>
             </ul>
         </div>
-        <div id="footer">
-            <p><sup>*</sup>Ideal matches might possibly be made at complete random. Jibe is not responsible for for veracity of matches and is one hundred percent unaccountable for matches that result in confusion. </p>
-</div>
+
     </body>
 </html>
