@@ -33,6 +33,9 @@ li.quest {
     list-style-type: none;
     padding-top: 10px
 }
+#aboutMatchWrapper{
+    padding-left: 40px;
+}
 
 
 /*navigation*/

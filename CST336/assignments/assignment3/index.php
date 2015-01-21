@@ -1,3 +1,6 @@
+<?php session_start();
+   // phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,6 +23,57 @@
 	</head>
 
 	<body>
+<?php
+//
+// define variables and set to empty values
+$fnameErr = $lnameErr = $preferErr = $favdayErr = "";
+$fname = $lname = $prefer = $comment = $website = "";
+$valid = true;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (empty($_POST["fname"])) {
+        $fnameErr = "First name is required";
+        $valid = false;
+   } else {
+     $firstname = test_input($_POST["fname"]);
+   }
+
+   if (empty($_POST["lname"])) {
+        $lnameErr = "Last name is required";
+       $valid = false;
+   }else{
+        $lastname =  test_input($_POST["lname"]);
+   }
+
+
+
+   if (empty($_POST["days"])) {
+     $favdayErr = "You must answser this question";
+       $valid = false;
+   }
+
+   if (empty($_POST["prefer"])) {
+     $preferErr = "You must answser this question";
+       $valid = false;
+   }
+    if($valid){
+        $_SESSION["fname"] = $firstname;
+        $_SESSION["lname"] = $_POST["lname"];
+        $_SESSION["gender"] = $_POST["gender"];
+        $_SESSION["haircolor"] = $_POST["haircolor"];
+        $_SESSION["eyecolor"] = $_POST["eyecolor"];
+        $_SESSION["prefer"] = $_POST["prefer"];
+        $_SESSION["days"] = $_POST["days"];
+        header('Location: http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment3/results.php');
+    }
+}
+
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+?>
         <div id="header">
             <h1>JIBE.com</h1>
         </div>
@@ -32,12 +86,12 @@
 
             </h3>
             <h4>To get started tell us about yourself.</h4>
-            <form name="profile" method="post" action="results.php">
+            <form name="profile" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 <ul>
-                    <li class="quest">First Name: <input type="text" name="fname"> </li>
-                    <li class="quest">Last Name:  <input type="text" name="lname"></li>
+                    <li class="quest">First Name: <input type="text" name="fname" value="<?php $firstname ?>"> <span class="error"><?php echo $fnameErr ?></span></li>
+                    <li class="quest">Last Name:  <input type="text" name="lname" value="<?php $lastname ?>"> <span class="error"><?php echo $lnameErr ?></span></li>
                     <li class="quest">Gender:
-                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="male" checked>Male
                         <input type="radio" name="gender" value="female">Female
                     </li >
                     <li class="quest">Select Hair Color:
@@ -53,7 +107,7 @@
                     <li  class="quest">Select Eye Color:
                         <select name="eyecolor" size="1">
                             <option value="green">Green</option>
-                            <option value="black">Black</option>
+                            <option value="brown">Brown</option>
                             <option value="blue">Blue</option>
                             <option value="gray">Gray</option>
                         </select>
@@ -65,13 +119,13 @@
                 <h4>Answer the following multiple choice questions to determine your JIBE<sup>&copy;</sup>.</h4>
                 <ul>
                     <li class="quest">Which day do you prefer?
-                        <li class="quest"><input type="radio" name="days" value="monday">Monday </li>
+                        <li class="quest"><input type="radio" name="days" value="monday" checked>Monday </li>
                         <li class="quest"><input type="radio" name="days" value="thursday">Thursday</li>
                         <li class="quest"><input type="radio" name="days" value="sunday">Sunday</li>
                     </li>
                     <li class="quest"></li>
                     <li class="quest">In a companion which do you prefer?
-                        <li class="quest"><input type="radio" name="prefer" value="opposite">Complete opposite </li>
+                        <li class="quest"><input type="radio" name="prefer" value="opposite" checked>Complete opposite </li>
                         <li class="quest"><input type="radio" name="prefer" value="same">Exactly the same</li>
                         <li class="quest"><input type="radio" name="prefer" value="middle">Somewhere in between</li>
                     </li>
