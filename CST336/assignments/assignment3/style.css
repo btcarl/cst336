@@ -79,3 +79,8 @@ ul {
     margin-left: 40px;
     max-width: 70%;
 }
+
+.error {
+    color:#e91e63
+
+}
