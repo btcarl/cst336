@@ -20,7 +20,9 @@ h1 {
 #header {
     background-color: #3F51B5;
     width: inherit;
-    margin: 0px
+    margin: 0px;
+    width: 100%;
+    overflow: hidden;
 }
 
 /*body*/

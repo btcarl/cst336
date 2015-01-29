@@ -31,7 +31,8 @@ h2 {
     text-align: center;
     background-color: #273F6E;
     color: #B52025;
-    text-shadow: 2px 1px white
+    border-bottom: 3px solid #B52025;
+    text-shadow: 2px 1px #E16569
 }
 
 .contents {
@@ -45,8 +46,8 @@ h2 {
 
 }
 tr:nth-child(even) {
-    background: #CCC
+    background: #FFF
 }
 tr:nth-child(odd) {
-    background: #FFF
+    background: #CCC
 }

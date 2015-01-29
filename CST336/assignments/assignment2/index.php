@@ -269,8 +269,8 @@
             <li class="links">
                 Lab 4
                 <ul>
-                    <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section1.php">Section 1</li>
-                    <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section2.php">Section 2</li>
+                    <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section1.php">Section 1</a></li>
+                    <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section2.php">Section 2</a></li>
                 </ul>
             </li>
             <li class="links">Lab 5</li>
