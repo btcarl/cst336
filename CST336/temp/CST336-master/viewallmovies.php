@@ -15,6 +15,8 @@
         global $dbconn;
 
         $sql = "SELECT DISTINCT rating
+        323
+        +
                 FROM movie_table
                 ORDER BY rating ASC";
 
@@ -52,6 +54,18 @@
 
 <head>
 <style>
+table {
+		margin: 0 auto;
+		border-collapse: collapse;
+		border: solid red 4px;
+		padding: 10px;
+		font-size: 15px;
+}
+td {
+		padding: 20px;
+		border: solid red 4px;
+		text-align: center;
+}
 #header {
 	border-bottom:solid 2px #f02323;
     text-align:center;
@@ -60,37 +74,23 @@
 }
 #nav {
     line-height:30px;
-    height:1100px;
+    height:1000px;
     width:220px;
     float:left;
     padding:5px;
     border-right: thin solid pink;
 }
 #section {
-    width:850px;
+    width:1150px;
     float:left;
     padding:20px;
-    text-align: center;
 }
 #footer {
-    background-color: #f02323;
-    margin: 0;
-    color: #FFF;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-#footer_img_wrapper {
-    margin-right: 10px;
-    margin-top: 3px;
-    float:right
-
-}
-#copyright_wrapper {
-    float: left;
-    height: 30px;
-    margin-left: 10px;
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+   padding:5px;
 }
 div.logo {
     float: left;
@@ -148,7 +148,6 @@ div.search {
     min-width:500px;
     text-align: right
 }
-
 </style>
 </head>
 
@@ -184,35 +183,54 @@ Search All Movies
 </div>
 
 <div id="section">
-<h2>Welcome!</h2>
-<p>
-Welcome to the Crimson Cube Website.  The Crimson Cube is a DVD rental service that is available at some of the most popular grocery stores.  We also rent DVD's online.
-  Feel free to search through our available DVD's on our website.
-</p>
-<p>
-Please start by loging in to your account, or if you do not currently have an account with us, click the "Creat New Account" button at the bottom of the page.
-</p>
-<form action = "viewallMovies.php" method = "POST">
-			Username:  <input type = "text" name = "username"><br/><br/>
-			Password:  <input type = "text" name = "password"><br/><br/>
-			<input type = "submit" value = "Sign In!">
-		</form>
-<br/><br/>
-<form action = "signup.php" method = "POST">
-	<input type = "submit" value = "Create New Account!">
-</form>
+<h2>View All Movies</h2>
+<p>Here are all movies that are available to rent, please note, some movies may not be available since they have already been rented out.  If you would like to filter
+	your search by genre, year released, or rating click any of the search filters below</p>
+                	<?php
+                	$rows = 30;
+					$allmovies = getMovieNames();
+                	echo "<table border = \"1\">";
+                		echo "<tr>";
+						?>
+                			<td id = "title"><strong>Movie Title</strong></td>
+                			<td id = "title"><strong>Release Date</strong></td>
+                			<td id = "title"><strong>Movie Rating</strong></td>
+                			<td id = "title"><strong>Category</strong></td>
+							<td> </td>
+						<?php
+                		echo "</tr>";
+						foreach ($allmovies as $movie) {
+							echo "<tr>";
+							echo "<td>";
+								echo "<option value='" . $movie['movie_title'] . "' >" . $movie['movie_title']. "</option>";
+							echo "</td>";
+							echo "<td>";
+								echo "<option value='" . $movie['movie_title'] . "' >" . $movie['release_date']. "</option>";
+							echo "</td>";
+							echo "<td>";
+								echo "<option value='" . $movie['movie_title'] . "' >" . $movie['rating']. "</option>";
+							echo "</td>";
+							echo "<td>";
+								echo "<option value='" . $movie['movie_title'] . "' >" . $movie['movie_category']. "</option>";
+							echo "</td>";
+							echo "<td>";
+							?>
+							<form action = "rentnow.php" method = "post">
+							<input type = "hidden" name = "movieId" value = "<?=$movie['movie_title']?>">
+							<input type = "submit" name = "update" value = "Rent Now">
+							</form>
+							<?php
+				}
+					echo "</table>";
+
+
+
+
+				?>
 </div>
 
 <div id="footer">
-            <div id="copyright_wrapper">
-                <p>site design / logo © 2015  CSIT GUYS</p>
-                <span class="clear"></span>
-            </div>
-
-            <div id="footer_img_wrapper">
-                <img src="images/inverse.png" height="30px" width="100px">
-                <span class="clear"></span>
-            </div>
+Copyright © W3Schools.com
 </div>
 
 </body>

@@ -6,100 +6,57 @@
     require "connections.php";
     function getReleaseDate(){
         global $dbconn;
-
         $sql = "SELECT DISTINCT release_date
                 FROM movie_table
                 ORDER BY release_date DESC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
     function getRatings(){
         global $dbconn;
-
         $sql = "SELECT DISTINCT rating
                 FROM movie_table
                 ORDER BY rating ASC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
     function getGenres(){
         global $dbconn;
-
         $sql = "SELECT movie_category,
                 COUNT(*) AS amount
                 FROM movie_table
                 GROUP BY movie_category
                 ORDER BY amount DESC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
-    function has_next($array) {
-        if (is_array($array)) {
-            if (next($array) === false) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
     function getMovieNames(){
         global $dbconn;
-        $condition = "WHERE " ;
-        $arrayconditions = array();
-        while($filteritem = current($_GET)){
-            if (key($_GET) == 'location'){
-                $condition .= "movie_table.movie_id IN (
-                               SELECT movie_id
-                               FROM inventory
-                               WHERE location_id = :location_id)";
 
-                $arrayconditions['location_id'] = $filteritem;
-            }
-            elseif(key($_GET) == 'genre'){
-                $condition .= "movie_category= :genre ";
-                $arrayconditions['genre'] = $filteritem;
-            }elseif(key($_GET) == 'rating'){
-                $condition .= "rating= :rating ";
-                $arrayconditions[':rating'] = $filteritem;
-            }elseif(key($_GET) == 'year'){
-                $condition .= "release_date= :year ";
-                $arrayconditions[':year'] = $filteritem;
-            }
-            if(has_next($_GET)){
-                $condition .= " AND ";
-            }
-            next($_GET);
-        }
 		$sql = "SELECT rating, movie_category, release_date, movie_title, movie_id
-				FROM movie_table";
+				FROM movie_table
+				ORDER BY movie_title";
 
-        if($condition >"WHERE "){
-
-            //echo"<br>" . $sql . "</br>";
-            $sql .= " ". $condition ." ORDER BY movie_title";
-            $stmt = $dbconn -> prepare($sql);
-            $stmt -> execute($arrayconditions);
-            //$stmt -> execute(array(':location_id' =>2));
-        }else{
-            $sql .= " ORDER BY movie_title";
-            $stmt = $dbconn -> prepare($sql);
-            $stmt -> execute();
-        }
-
-
+        $stmt = $dbconn -> prepare($sql);
+        $stmt -> execute();
         return $stmt->fetchAll();
+	}
+	function getName($invId){
+		global $dbconn;
+		$sql = "SELECT movie_title
+	                FROM movie_table
+	                INNER JOIN inventory
+	                ON movie_table.movie_id = inventory.movie_id
+	                WHERE inventory_id =" .$invId;
+	        $stmt = $dbconn -> prepare($sql);
+        	$stmt -> execute();
+        	return $stmt->fetch();
 	}
     function getLocations(){
         global $dbconn;
-
         $sql = "SELECT name, location_id
                 FROM locations
                 ORDER BY name";
@@ -129,12 +86,40 @@
         $category = $stmt->fetchAll();
 
     }
+	function getrentedmovies () {
+		global $dbconn;
+		if (isset ($_SESSION['user_id'])) {
 
+			$sql = "SELECT transaction_id, dates, returned, inventory_id
+					FROM transactions
+					WHERE customer_id = :customer_id AND returned = 0";
+			$stmt = $dbconn -> prepare($sql);
+			$stmt -> execute(array(':customer_id'=>$_SESSION['user_id']));
+			return $stmt -> fetchAll();
+		}
+	}
+	if (isset($_POST['update'])) { //checks whether we're coming from "save data" form
 
+	$sql = "UPDATE transactions
+			SET returned = 1
+			WHERE transaction_id = :transaction_id";
+	$stmt = $dbconn -> prepare($sql);
+	$stmt -> execute(array(':transaction_id'=> $_POST['transaction_id']));
+
+	echo "Movie Has Been Returned!! <br> <br>";
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<style>
+			h1 {
+				text-align: center;
+			}
+			.menuitem {
+				text-align: center;
+			}
+		</style>
 		<meta charset="utf-8">
 
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
@@ -158,7 +143,6 @@
                     event.preventDefault();
                 }
             }
-
             function confirmLogout(event) {
                 var logout = confirm("Do you really want to log out?");
                 if (!logout) {
@@ -228,8 +212,6 @@
 
         <div id=main>
             <div id="navbar">
-
-
                 <div id="links">
                     <?php
                     echo "<h4>Welcome " . $_SESSION['fname'] . " ". substr($_SESSION['lname'], 0,1) ."</h4>"
@@ -252,51 +234,44 @@
                 <span class="clear"></span>
             </div>
             <div id="mainpage">
+                <h1>Return A Movie</h1>
+                <p>Here is a list of all movies you currently have rented out.  Click "Return Now" to return any movie.</p>
                 <?php
-                    if(isset($_GET['searchBar'])){
-                        $allmovies = $searchResults;
-                    }else{
-                       $allmovies = getMovieNames();
-                    }
 
-                	echo "<table border = \"1\">";
-                		echo "<tr>";
-						?>
-                			<td id = "title"><strong>Movie Title</strong></td>
-                			<td id = "title"><strong>Release Date</strong></td>
-                			<td id = "title"><strong>Movie Rating</strong></td>
-                			<td id = "title"><strong>Category</strong></td>
+		$moviesrented = getrentedmovies();
+		echo "<table border = \"1\">";
+		echo "<tr>";
+		?>
+			<td id = "title"><strong>Transaction ID</strong></td>
+			<td id = "title"><strong>Date</strong></td>
+			<td id = "title"><strong>Movie Name</strong></td>
+			<td id = "title"><strong>Please Return</strong></td>
+			<?php
+		echo "</tr>";
+				foreach ($moviesrented as $movie) {
+					$name = getName($movie['inventory_id']);
+					echo "<tr>";
+					echo "<td>";
+						echo "<option value='" . $movie['transaction_id'] . "' >" . $movie['transaction_id']. "</option>";
+					echo "</td>";
+					echo "<td>";
+						echo "<option value='" . $movie['dates'] . "' >" . $movie['dates']. "</option>";
+					echo "</td>";
+					echo "<td>";
+						echo "<option value='" . $name['movie_title']. "' >" . $name['movie_title']. "</option>";
+					echo "</td>";
+					echo "<td>";
 
-						<?php
-                		echo "</tr>";
-						foreach ($allmovies as $movie) {
-							echo "<tr>";
-
-							echo "<td class=movie_title>";
-                                echo '<a class="title_link "href="movie_detail.php?movie_id=' . $movie['movie_id'] . '">';
-                                    echo  $movie['movie_title'];
-                                echo "</a>";
-							echo "</td>";
-							echo "<td>";
-								echo $movie['release_date'];
-							echo "</td>";
-							echo "<td>";
-								echo $movie['rating'];
-							echo "</td>";
-							echo "<td>";
-								echo  $movie['movie_category'];
-							echo "</td>";
-
-							?>
-							<?php
-				}
-					echo "</table>";
-
-
-
-
-				?>
-
+					?>
+					<form method = "post">
+					<input type = "hidden" name = "transaction_id" value = "<?=$movie['transaction_id']?>">
+					<input type = "submit" name = "update" value = "Please Return">
+					</form>
+					</td>
+					<?php
+					}
+			echo "</table>";
+		?>
             </div>
         </div>
 

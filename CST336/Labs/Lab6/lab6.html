@@ -1,0 +1,107 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Brian Carlston - lab 6</title>
+		<meta name="description" content="">
+		<meta name="author" content="bcarlston">
+
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+
+	</head>
+		<body>
+			<div>
+				<h2>Vocabulary Quiz</h2>
+				<div id="q1">
+					<h3>1.Click on "el pollo"</h3>
+					<img src="img/cat.png" id="catImg" class="q1img">
+					<img src="img/dog.png" id="dogImg" class="q1img">
+					<img src="img/mouse.png" id="mouseImg" class="q1img">
+					<img src="img/chicken.png" id="chickenImg" class="q1img">
+				</div>
+			</div>
+			<h3>2. What is cat in Spanish?</h3>
+			<input type="text" id="q2"/>
+
+			<h3>3. What is dog in Spanish?</h3>
+			<input type="radio" name="q3" value="cat">Gato<br />
+			<input type="radio" name="q3" value="dog">Perro<br />
+			<input type="radio" name="q3" value="fish">Pescado<br />
+			<input type="radio" name="q3" value="donkey">Burro<br />
+
+			<h3>4. What animal is an oso?</h3>
+			<input type="radio" name="q4" value="cat">cat<br />
+			<input type="radio" name="q4" value="bird">bird<br />
+			<input type="radio" name="q4" value="wolf">wolf<br />
+			<input type="radio" name="q4" value="bear">bear<br />
+
+			<h3>5. Which animal would be found on a farm?</h3>
+			<select id="q5">
+				<option value="lion">leon</option>
+				<option value="cow">vaca</option>
+				<option value="squirrel">ardilla</option>
+				<option value="beaver">castor</option>
+			</select>
+			<br />
+			<br />
+			<input type="button" value="Submit Quiz!" id="submitQuiz" />
+			<h2 id="grade"> </h2>
+			<h2 id="postgrade"> </h2>
+		<script>
+			var answer1;
+			var grade;
+			$(".q1img").hover(
+				function(){
+
+					$(this).css("width","125px");
+				},function(){
+					$(this).css("width","100px");
+				}
+			);
+			$(".q1img").click(function(){
+				$(".q1img").css("border", "none");
+				$(this).css("border", "solid black 2px");
+				answer1 = $(this).attr("id");
+				console.log(answer1);
+			});
+
+		$("#submitQuiz").click( function(){
+     		var letter;
+          	var answer2 = $("#q2").val().toUpperCase();
+          	var answer3 = $("input:radio[name=q3]:checked").val();
+        	var answer4 = $("input:radio[name=q4]:checked").val();
+			var answer5 = $("#q5 option:selected").val();
+
+          //$("#grade").html("Grade: "  + grade);
+			$.post( "grade.php",
+				{ ans1: String(answer1), ans2: String(answer2), ans3: String(answer3), ans4: String(answer4), ans5: String(answer5) },function(data) {
+				$('#grade').html("Grade: "  + data +"% ");
+					grade = data;
+				}
+
+		);
+
+
+				/*switch(true){
+						case (window.grade >=90): letter ='A';break;
+						case (window.grade >=80): letter ='B';break;
+						case (window.grade >=70): letter ='C';break;
+						case (window.grade >=60): letter ='D';break;
+						default:letter ='F';
+				}
+				$('#grade').append(" " +letter);*/
+			}  );
+        </script>
+		</body>
+</html>

@@ -154,7 +154,9 @@ function test_input($data) {
                             <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section2.php">Section 2</a></li>
                         </ul>
                     </li>
-                    <li class="links">Lab 5</li>
+                    <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab5/lab5.php">Lab 5</a></li>
+				<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab6/lab6.html">Lab 6</a></li>
+			<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab7/lab7.html">Lab 7</a></li>
                   </ul>
                 </li>
                 <li >

@@ -31,7 +31,7 @@
 			{
 				$count = 0;
 				//horizontal check
-
+                //left
 				for($i=$x; $i>=0;$i--){
 					if($game[$i][$y]==$color){
 						$count++;
@@ -40,6 +40,7 @@
 						break;
 					}
 				}
+                //right
 				if($x<6){
 					for($i=($x+1);$i<=6;$i++){
 						//echo "<br>debug: $i,$y";
@@ -56,6 +57,7 @@
 				}
 				//vertical check
 				$count = 0;
+                //down
 				for($i=$y; $i>=0;$i--){
 					if($game[$x][$i]==$color){
 						$count++;
@@ -63,6 +65,7 @@
 						break;
 					}
 				}
+                //up
 				if($y<5){
 					for($i=($y+1);$y<=5;$y++){
 						if($game[$x][$i]==$color){
@@ -78,6 +81,7 @@
 				
 				//diagonal left
 				$count = 1;
+                //up and left
 				if($x-1>=0 and $y+1<=5){
 					if($game[$x-1][$y+1]==$color){
 						$count++;
@@ -93,6 +97,7 @@
 						}
 					}
 				}
+                //down and right
 				if($x+1<=6 and $y-1>=0){
 					if($game[$x+1][$y-1]==$color){
 						$count++;
@@ -114,6 +119,7 @@
 				
 				//diagonal right
 				$count = 1;
+                //down and left
 				if($x-1>=0 and $y-1>=0){
 					if($game[$x-1][$y-1]==$color){
 						$count++;
@@ -129,6 +135,7 @@
 						}
 					}
 				}
+                //up and right
 				if($x+1<=6 and $y+1<=5){
 					if($game[$x+1][$y+1]==$color){
 						$count++;
@@ -273,7 +280,9 @@
                     <li><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab4/lab4section2.php">Section 2</a></li>
                 </ul>
             </li>
-            <li class="links">Lab 5</li>
+            <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab5/lab5.php">Lab 5</a></li>
+			<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab6/lab6.html">Lab 6</a></li>
+			<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab7/lab7.html">Lab 7</a></li>
           </ul>
         </li>
         <li >
@@ -284,7 +293,7 @@
               <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/assignments/assignment3/index.php">Assignment 3</a></li>
           </ul>
         </li>
-        <li class="sections">Team Assignment</li>
+          <li class="sections"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/team_project/index.php">Team Assignment</a></li>
         <li class="sections"><a href="http://btc-csit.blogspot.com/">Learning Journal</a></li>
       </ul>
     </div>

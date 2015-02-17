@@ -6,100 +6,46 @@
     require "connections.php";
     function getReleaseDate(){
         global $dbconn;
-
         $sql = "SELECT DISTINCT release_date
                 FROM movie_table
                 ORDER BY release_date DESC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
     function getRatings(){
         global $dbconn;
-
         $sql = "SELECT DISTINCT rating
                 FROM movie_table
                 ORDER BY rating ASC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
     function getGenres(){
         global $dbconn;
-
         $sql = "SELECT movie_category,
                 COUNT(*) AS amount
                 FROM movie_table
                 GROUP BY movie_category
                 ORDER BY amount DESC";
-
         $stmt = $dbconn -> prepare($sql);
         $stmt -> execute();
         return $stmt->fetchAll();
     }
-    function has_next($array) {
-        if (is_array($array)) {
-            if (next($array) === false) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
     function getMovieNames(){
         global $dbconn;
-        $condition = "WHERE " ;
-        $arrayconditions = array();
-        while($filteritem = current($_GET)){
-            if (key($_GET) == 'location'){
-                $condition .= "movie_table.movie_id IN (
-                               SELECT movie_id
-                               FROM inventory
-                               WHERE location_id = :location_id)";
 
-                $arrayconditions['location_id'] = $filteritem;
-            }
-            elseif(key($_GET) == 'genre'){
-                $condition .= "movie_category= :genre ";
-                $arrayconditions['genre'] = $filteritem;
-            }elseif(key($_GET) == 'rating'){
-                $condition .= "rating= :rating ";
-                $arrayconditions[':rating'] = $filteritem;
-            }elseif(key($_GET) == 'year'){
-                $condition .= "release_date= :year ";
-                $arrayconditions[':year'] = $filteritem;
-            }
-            if(has_next($_GET)){
-                $condition .= " AND ";
-            }
-            next($_GET);
-        }
 		$sql = "SELECT rating, movie_category, release_date, movie_title, movie_id
-				FROM movie_table";
+				FROM movie_table
+				ORDER BY movie_title";
 
-        if($condition >"WHERE "){
-
-            //echo"<br>" . $sql . "</br>";
-            $sql .= " ". $condition ." ORDER BY movie_title";
-            $stmt = $dbconn -> prepare($sql);
-            $stmt -> execute($arrayconditions);
-            //$stmt -> execute(array(':location_id' =>2));
-        }else{
-            $sql .= " ORDER BY movie_title";
-            $stmt = $dbconn -> prepare($sql);
-            $stmt -> execute();
-        }
-
-
+        $stmt = $dbconn -> prepare($sql);
+        $stmt -> execute();
         return $stmt->fetchAll();
 	}
     function getLocations(){
         global $dbconn;
-
         $sql = "SELECT name, location_id
                 FROM locations
                 ORDER BY name";
@@ -129,12 +75,31 @@
         $category = $stmt->fetchAll();
 
     }
+		function gettimes () {
+		global $dbconn;
 
+		$customer_id = $_SESSION['user_id'];
+		$sql = "SELECT date, login_time, logout_time, user_id
+				FROM user_activity
+				WHERE user_id = :user_id
+				ORDER BY date";
+		$stmt = $dbconn -> prepare($sql);
+		$stmt -> execute(array(':user_id'=>$customer_id));
+		return $stmt -> fetchAll();
 
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<style>
+			h1 {
+				text-align: center;
+			}
+			.menuitem {
+				text-align: center;
+			}
+		</style>
 		<meta charset="utf-8">
 
 		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
@@ -158,7 +123,6 @@
                     event.preventDefault();
                 }
             }
-
             function confirmLogout(event) {
                 var logout = confirm("Do you really want to log out?");
                 if (!logout) {
@@ -228,20 +192,18 @@
 
         <div id=main>
             <div id="navbar">
-
-
                 <div id="links">
-                    <?php
-                    echo "<h4>Welcome " . $_SESSION['fname'] . " ". substr($_SESSION['lname'], 0,1) ."</h4>"
-                    ?>
-                    <a href="signon.php">Sign In</a><br>
-                    <a href="returnmovie.php">Return A Movie</a><br>
-                    <a href="manageaccount.php">Manage Account</a><br>
-                    <a href="transactions.php">Order History</a><br>
-                <form method="post" action="signout.php" onsubmit="confirmLogout()">
-                    <input type="submit" value="Sign Out" />
-                </form>
-                </div>
+			<?php
+			echo "<h4>Welcome " . $_SESSION['fname'] . " ". substr($_SESSION['lname'], 0,1) ."</h4>"
+			?>
+			<a href="signon.php">Sign In</a><br>
+			<a href="returnmovie.php">Return A Movie</a><br>
+			<a href="manageaccount.php">Manage Account</a><br>
+			<a href="transactions.php">Order History</a><br>
+			<form method="post" action="signout.php" onsubmit="confirmLogout()">
+				<input type="submit" value="Sign Out" />
+			</form>
+		</div>
                 <ul>
                 <?php
                     foreach($genres as $genre){
@@ -252,51 +214,44 @@
                 <span class="clear"></span>
             </div>
             <div id="mainpage">
-                <?php
-                    if(isset($_GET['searchBar'])){
-                        $allmovies = $searchResults;
-                    }else{
-                       $allmovies = getMovieNames();
-                    }
+                <h1>Manage My Account</h1>
+                <h3>User Activity</h3>
+                <p>From this page, you can see all of your login activity.  The table below will show you each date and time you logged in and out of your account here at the Crimson Cube.</p>
+                  <?php
+		if (isset($_SESSION['user_id'])) {
 
-                	echo "<table border = \"1\">";
+				echo "<table border = \"1\">";
                 		echo "<tr>";
 						?>
-                			<td id = "title"><strong>Movie Title</strong></td>
-                			<td id = "title"><strong>Release Date</strong></td>
-                			<td id = "title"><strong>Movie Rating</strong></td>
-                			<td id = "title"><strong>Category</strong></td>
-
+                			<td id = "title"><strong>Username</strong></td>
+                			<td id = "title"><strong>Date</strong></td>
+                			<td id = "title"><strong>Login Time</strong></td>
+                			<td id = "title"><strong>Logout Time</strong></td>
 						<?php
                 		echo "</tr>";
-						foreach ($allmovies as $movie) {
+						$timeinfo = gettimes();
+						foreach ($timeinfo as $time) {
 							echo "<tr>";
-
-							echo "<td class=movie_title>";
-                                echo '<a class="title_link "href="movie_detail.php?movie_id=' . $movie['movie_id'] . '">';
-                                    echo  $movie['movie_title'];
-                                echo "</a>";
+							echo "<td>";
+								echo "<option value='" . $time['user_id'] . "' >" . $time['user_id']. "</option>";
 							echo "</td>";
 							echo "<td>";
-								echo $movie['release_date'];
+								echo "<option value='" . $time['date'] . "' >" . $time['date']. "</option>";
 							echo "</td>";
 							echo "<td>";
-								echo $movie['rating'];
+								echo "<option value='" . $time['login_time'] . "' >" . $time['login_time']. "</option>";
 							echo "</td>";
 							echo "<td>";
-								echo  $movie['movie_category'];
+								echo "<option value='" . $time['logout_time'] . "' >" . $time['logout_time']. "</option>";
 							echo "</td>";
-
-							?>
-							<?php
-				}
+							}
 					echo "</table>";
-
-
-
-
-				?>
-
+					}?>
+					<br/><br/>
+                 <span class="menuItem"><a href = "manageaccount.php"?>Main Menu</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+ 			  	 <span class="menuItem"><a href="changepassword.php">Change Password</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+ 			  	  <span class="menuItem"><a href="useractivity.php">User Activity</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+  				 <span class="menuItem"><a href = "transactions.php">View All Transactions</a></span>
             </div>
         </div>
 

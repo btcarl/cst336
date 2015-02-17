@@ -1,0 +1,135 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Brian Carlston - lab 7</title>
+		<meta name="description" content="">
+		<meta name="author" content="bcarlston">
+
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
+
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+		<script>
+			$("#zipCode").change(function(){
+				$("#zipCode").style("background-color: #f02323");
+
+			});
+		</script>
+		<div>
+			<h2>Registration Form</h2>
+			<form action="catalog.php">
+				First Name: <input type="text" name="fname" /><br /><br />
+				Last Name: <input type="text" name="lname" /><br /><br />
+				Email: <input type="text" name="email" /><br /><br />
+				Zip Code: <input type="text" id="zipCode" name="zipCode" size="5"/><br /><br />
+				City: <span id="city"></span><br /><br />
+				State:
+				<select id="state">
+					<option value=""> Select One </option>
+					<option value="AZ"> Arizona </option>
+					<option value="CA"> California </option>
+					<option value="IL"> Illinois</option>
+					<option value="TX"> Texas </option>
+				</select>
+				<br /><br />
+				County:
+				<select id="county">
+
+				</select>
+				<br /><br />
+				Username: <input type="text" name="userName" id="userName"/>
+				<span id="checkUsername"></span><br /><br />
+				Password: <input type="password" id="password" name="password"/>
+				<br />
+				<input type="submit" value="Sign up!">
+			</form>
+		</div>
+
+	</body>
+	<script>
+
+		$("#zipCode").change(function(){
+			//alert($("#zipCode").val());
+			$("#userName").css("background-color", "#f02323");
+			$.ajax({
+				type: "get",
+				url: "zip.php",
+				dataType: "json",
+				data: {"zip_code":$("#zipCode").val()},
+				success: function(data,status){
+					//alert(data["city"])
+					$("#city").html(data["city"]);
+				},
+				complete: function(data,status){
+					//debug stuff
+				}
+			});
+		});
+		$("#state").change( function(){
+
+
+			alert( $("#state").val() );
+			$.ajax({
+				type: "get",
+				url: "countyList.php",
+				dataType:'Json',
+				data: { "state": $("#state").val() },
+				success: function(data,status) {
+					$("#county").html("<option> Select One </option>");
+					for (var i=0; i< data['counties'].length; i++){
+						$("#county").append("<option>" + data["counties"][i].county + "</option>" );
+					}
+				},
+				complete: function(data,status) { //optional, used for debugging purposes
+				 // alert(status);
+				}
+			});
+		});
+
+		$("#userName").change( function(){
+			//alert($("#userName").val());
+			$.ajax({
+				type: "post",
+				url: "userLookup.php",
+				dataType: "json",
+				data: { "username": $("#userName").val() },
+				success: function(data,status) {
+				 //alert(data['exists']);
+					if (data['exists'] == "true")  {
+						$("#checkUsername").html("Username already taken!");
+						$("#checkUsername").css("color","red");
+						$("#userName").css("background-color","red");
+						$("#userName").focus();
+			   		} else {
+					  	$("#checkUsername").html("Username available!");
+					  	$("#checkUsername").css("color","");
+					  	$("#userName").css("background-color","green");
+
+			   		}
+				},
+			  	complete: function(data,status) { //optional, used for debugging purposes
+				  //alert(status);
+			  	}
+         	});
+		});
+
+		$("form input:text").mouseenter(function(){
+			$(this).css("background-color", "#f0efef");
+		});
+		$("form input:text").mouseleave(function(){
+			$(this).css("background-color", "fff");
+		});
+	</script>
+</html>

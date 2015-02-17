@@ -67,10 +67,9 @@
     border-right: thin solid pink;
 }
 #section {
-    width:850px;
+    width:1150px;
     float:left;
     padding:20px;
-    text-align: center;
 }
 #footer {
     background-color: #f02323;
@@ -190,17 +189,9 @@ Welcome to the Crimson Cube Website.  The Crimson Cube is a DVD rental service t
   Feel free to search through our available DVD's on our website.
 </p>
 <p>
-Please start by loging in to your account, or if you do not currently have an account with us, click the "Creat New Account" button at the bottom of the page.
+Standing on the River Thames, London has been a major settlement for two millennia,
+its history going back to its founding by the Romans, who named it Londinium.
 </p>
-<form action = "viewallMovies.php" method = "POST">
-			Username:  <input type = "text" name = "username"><br/><br/>
-			Password:  <input type = "text" name = "password"><br/><br/>
-			<input type = "submit" value = "Sign In!">
-		</form>
-<br/><br/>
-<form action = "signup.php" method = "POST">
-	<input type = "submit" value = "Create New Account!">
-</form>
 </div>
 
 <div id="footer">

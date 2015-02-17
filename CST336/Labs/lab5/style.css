@@ -1,0 +1,53 @@
+html {
+    overflow: scroll
+}
+form {
+    display: inline
+}
+body {
+    background-image: url(contact-us-cp.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    margin: 0;
+    display: inline-block
+}
+
+
+.main {
+    width: 60%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+h2 {
+    font-size: 48px;
+    text-align: center;
+    background-color: #273F6E;
+    color: #B52025;
+    border-bottom: 3px solid #B52025;
+    text-shadow: 2px 1px #E16569
+}
+
+.contents {
+    padding: 20px;
+    line-height: 1.5
+}
+
+.stadname {
+    display: inline-block;
+    min-width: 230px;
+
+}
+tr:nth-child(even) {
+    background: #FFF
+}
+tr:nth-child(odd) {
+    background: #CCC
+}

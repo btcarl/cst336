@@ -70,7 +70,7 @@
 
     ?>
     <br /><br />
-    <a href="lab4section2.php"> Go back to main page </a>
+    <a href="lab5.php"> Go back to main page </a>
 
     </div>
 </body>

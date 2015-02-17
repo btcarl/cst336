@@ -184,7 +184,9 @@ session_start();
                     <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab2/index.php">Lab 2</a></li>
                     <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab3/index.php">Lab 3</a></li>
                     <li class="links">Lab 4</li>
-                    <li class="links">Lab 5</li>
+                    <li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/lab5/lab5.php">Lab 5</a></li>
+					<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab6/lab6.html">Lab 6</a></li>
+					<li class="links"><a href="http://hosting.otterlabs.org/carlstonbriant/CST336/Labs/Lab7/lab7.html">Lab 7</a></li>
                   </ul>
                 </li>
                 <li >
